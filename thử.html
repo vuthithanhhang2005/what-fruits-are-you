@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Love Fruit — Kết quả</title>
+<link rel="stylesheet" href="chung.css">
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    background: linear-gradient(to bottom, #e8f8e8, #fff);
+    color: #111;
+    height: 100%;
+  }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .topbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .back {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    background: #f5f5f5;
+    color: #111;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .back.show {
+    display: inline-flex;
+  }
+
+  .slug { display: none; }
+
+  .frame {
+    border: none;
+    border-radius: 14px;
+    padding: 0;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #resultImg {
+    max-height: calc(100vh - 240px);
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    border: none;
+  }
+
+  .label {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f8b57;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  button {
+    appearance: none;
+    cursor: pointer;
+    border: 1px solid darkgreen;
+    background: #237b36;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  button.light {
+    background: #f5f5f5;
+    color: #237b36;
+  }
+
+  /* Nút "Tham gia khảo sát" riêng */
+  #surveyBtn {
+    width: 380px; /* dài hơn các nút khác */
+    text-align: center;
+  }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    place-items: center;
+    background: rgba(0, 0, 0, .35);
+  }
+
+  .modal.show {
+    display: grid;
+  }
+
+  .sheet {
+    background: #fff;
+    color: #111;
+    width: min(92vw, 520px);
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    padding: 16px;
+  }
+
+  .sheet h3 {
+    margin: 0 0 10px;
+  }
+
+  .row {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin: 6px 0;
+  }
+
+  .pill {
+    display: inline-block;
+    margin: 4px 6px 0 0;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .pill.ok {
+    background: #eafff3;
+    border: 1px solid #86efac;
+  }
+
+  .pill.no {
+    background: #fff0f2;
+    border: 1px solid #fda4af;
+  }
+
+  .pill.other {
+    background: #f0f7ff;
+    border: 1px solid #93c5fd;
+  }
+
+  .close {
+    margin-top: 12px;
+    background: #f5f5f5;
+    color: #111;
+    width: 100%;
+  }
+
+  @media(max-width:480px) {
+    button {
+      flex: 1;
+    }
+    #surveyBtn {
+      width: 100%;
+    }
+    .label {
+      font-size: 18px;
+    }
+  }
+</style>
+</head>
+
+<body>
+<main class="wrap">
+  <div class="topbar">
+    <button id="backBtn" class="back">↩ Quay lại kết quả của tôi</button>
+    <div class="slug" id="slugText"></div>
+  </div>
+
+  <img src="ảnh kết quả.png" alt="Các loại quả" style="height: 60px; width: auto; margin-bottom: 0px; margin-top: 0px;"/>
+  <div id="resultLabel" class="label" style="display:none;"> 
+    <strong><h style="font-size: 23px; margin-top: 0px; margin-bottom: 0px;">LOVESTORY: WHAT FRUITS ARE YOU?</h></strong> 
+  </div>
+
+  <div class="frame">
+    <img id="resultImg" alt="Kết quả tình duyên">
+  </div>
+
+  <!-- 3 nút đầu -->
+  <div class="actions">
+    <button id="saveBtn">Lưu ảnh</button>
+    <button id="shareBtn" class="light">Chia sẻ</button>
+    <button id="compatBtn" class="light">Tìm hiểu các nhân vật khác</button>
+  </div>
+
+  <!-- Nút khảo sát nằm dưới, dài hơn -->
+  <div class="actions">
+    <button id="surveyBtn" class="light">Tham gia khảo sát</button>
+  </div>
+</main>
+
+<div class="modal" id="compatModal">
+  <div class="sheet">
+    <h3 id="titleModal">Tương thích</h3>
+    <div class="row">
+      <strong>Bạn phù hợp với</strong>
+      <div id="okList"></div>
+    </div>
+    <div class="row">
+      <strong>Bạn không phù hợp với</strong>
+      <div id="noList"></div>
+    </div>
+    <div class="row">
+      <strong>Các nhân vật khác</strong>
+      <div id="otherList"></div>
+    </div>
+    <button class="close" id="closeModal">Đóng</button>
+  </div>
+</div>
+
+<script>
+const fruits = {
+  mangosteen:{slug:"mangosteen",image:"./images/mangosteen.png",compat:["Kiwi","Blueberry"],avoid:["Lemon"]},
+  rambutan:{slug:"rambutan",image:"./images/rambutan.png",compat:["Strawberry","Pomegranate"],avoid:["Blueberry"]},
+  pomegranate:{slug:"pomegranate",image:"./images/pomegranate.png",compat:["Mangosteen","Blueberry"],avoid:["Rambutan"]},
+  lemon:{slug:"lemon",image:"./images/lemon.png",compat:["Strawberry","Rambutan"],avoid:["Mangosteen","Kiwi"]},
+  blueberry:{slug:"blueberry",image:"./images/blueberry.png",compat:["Mangosteen","Pomegranate"],avoid:["Rambutan","Strawberry"]},
+  pineapple:{slug:"pineapple",image:"./images/pineapple.png",compat:["Mangosteen","Strawberry"],avoid:["Lemon"]},
+  strawberry:{slug:"strawberry",image:"./images/strawberry.png",compat:["Kiwi","Rambutan"],avoid:["Blueberry","Pomegranate"]},
+  kiwi:{slug:"kiwi",image:"./images/kiwi.png",compat:["Strawberry","Mangosteen"],avoid:["Lemon"]}
+};
+
+const $ = q => document.querySelector(q);
+let current;
+let myType;
+
+function loadFruit(key){
+  const k = (key||'').toLowerCase();
+  current = fruits[k] || fruits.mangosteen;
+  $('#resultImg').src = current.image;
+  $('#resultImg').alt = current.slug;
+  document.title = `${current.slug} — Love Fruit`;
+
+  $('#resultLabel').style.display = (current.slug === myType) ? 'block' : 'none';
+  $('#backBtn').classList.toggle('show', current.slug !== myType);
+}
+
+(function init(){
+  const url = new URL(location.href);
+  let t = url.searchParams.get('type');
+  if (!t || !fruits[t.toLowerCase()]) t = 'mangosteen';
+  myType = t.toLowerCase();
+  loadFruit(t);
+  history.replaceState({type:t}, '', `?type=${t}`);
+})();
+
+window.addEventListener('popstate', e=>{
+  const t = (e.state && e.state.type) || new URL(location.href).searchParams.get('type');
+  loadFruit(t);
+});
+
+$('#backBtn').addEventListener('click', ()=>{
+  const t = myType;
+  history.pushState({type:t}, '', `?type=${t}`);
+  loadFruit(t);
+});
+
+$('#saveBtn').onclick = async ()=>{
+  const res = await fetch(current.image); const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `${current.slug}.png`;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+};
+
+$('#shareBtn').onclick = async ()=>{
+  const res = await fetch(current.image); const blob = await res.blob();
+  if (navigator.canShare && window.File){
+    const file = new File([blob], `${current.slug}.png`, {type:'image/png'});
+    const data = { files:[file], title:'Love Fruit' };
+    if (navigator.canShare(data)) { await navigator.share(data); return; }
+  }
+  alert('Thiết bị không hỗ trợ chia sẻ trực tiếp. Ảnh sẽ được tải về.');
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `${current.slug}.png`;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+};
+
+const modal = $('#compatModal');
+$('#compatBtn').onclick = ()=>{
+  $('#titleModal').textContent = `Tương thích của ${current.slug[0].toUpperCase()+current.slug.slice(1)}`;
+  const build = (arr, cls) => arr.map(name=>{
+    const k = name.toLowerCase();
+    const valid = !!fruits[k];
+    return `<span class="pill ${cls}" ${valid ? `data-type="${k}"` : ""}>${name}</span>`;
+  }).join('');
+
+  const allKeys = Object.keys(fruits);
+  const compat = current.compat.map(v=>v.toLowerCase());
+  const avoid = current.avoid.map(v=>v.toLowerCase());
+  const others = allKeys.filter(k => !compat.includes(k) && !avoid.includes(k) && k !== current.slug.toLowerCase());
+
+  $('#okList').innerHTML = build(current.compat, 'ok');
+  $('#noList').innerHTML = build(current.avoid, 'no');
+  $('#otherList').innerHTML = build(others.map(k=>k[0].toUpperCase()+k.slice(1)), 'other');
+
+  modal.classList.add('show');
+};
+
+$('#closeModal').onclick = ()=> modal.classList.remove('show');
+modal.addEventListener('click', e=>{
+  if (e.target === modal) modal.classList.remove('show');
+  const pill = e.target.closest('.pill[data-type]');
+  if (pill){
+    const t = pill.dataset.type;
+    modal.classList.remove('show');
+    history.pushState({type:t}, '', `?type=${t}`);
+    loadFruit(t);
+  }
+});
+</script>
+</body>
+</html>

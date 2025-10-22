@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Fruits Are You?</title>
+  <style>
+    :root {
+      --green-dark: #145a32;
+      --green-medium: #2e7d32;
+      --green-light: #66bb6a;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #eafae3;
+      text-align: center;
+      color: var(--green-dark);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: relative;
+      background: url('image/vuon_background.png') center center no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 60px;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      z-index: 1;
+    }
+
+    header h1, header p, header a {
+      position: relative;
+      z-index: 2;
+    }
+
+    header p {
+      font-size: clamp(1.1rem, 2vw, 1.8rem);
+      font-weight: 600;
+      color: var(--green-medium);
+      text-shadow: 2px 2px 6px rgba(255,255,255,0.9);
+      margin-bottom: 5px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      color: var(--green-dark);
+      margin-top: 5px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px rgba(255,255,255,0.8);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--green-medium);
+      color: white;
+      padding: clamp(10px, 2vw, 16px) clamp(24px, 5vw, 48px);
+      font-size: clamp(0.9rem, 2vw, 1.3rem);
+      border-radius: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #43a047;
+      transform: scale(1.05);
+    }
+
+    /* 🍎 Carousel */
+    .fruit-carousel {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      background-color: transparent;
+      padding: 60px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .carousel-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: darkgreen;
+  margin-top: 50px;
+  margin-bottom: 0px;
+  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
+}
+
+    .fruit-track {
+      display: flex;
+      gap: 35px;
+      animation: scrollFruit 24s linear infinite;
+      width: max-content;
+    }
+
+    .fruit-track img {
+      width: clamp(140px, 17vw, 230px); 
+      height: auto;
+      border-radius: 15px;
+      transition: none; 
+      cursor: default;  
+    }
+
+ 
+    .fruit-track img:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Khi người dùng hover vào carousel, không dừng animation */
+    .fruit-carousel:hover .fruit-track {
+      animation-play-state: running;
+    }
+
+    @keyframes scrollFruit {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        padding-top: 40px;
+      }
+
+      header h1 {
+        font-size: clamp(1.5rem, 10vw, 4rem);
+        line-height: 50px;
+      }
+
+      header p {
+        font-size: clamp(1.5rem, 5vw, 2.8em);
+      }
+
+      .cta-button {
+        font-size: clamp(1.8rem, 4vw, 2rem);
+        margin-top: 30px;
+        padding: 10px 28px;
+      }
+    }
+
+    /* 🌿 Love Journey Section */
+.love-summary {
+  background-color: var(--green-dark);
+  color: #fff;
+  width: 100%;
+  padding: 80px 0;
+}
+
+.love-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.love-summary h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+.love-summary .intro {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0 auto 50px;
+  color: #eaffea;
+}
+
+.journey-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.stage {
+  flex: 1 1 calc(25% - 25px);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 25px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.stage:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.stage h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.stage p {
+  font-size: 0.95rem;
+  color: #eaffea;
+  line-height: 1.5;
+}
+
+/* CTA dưới cùng */
+.cta-container {
+  margin-top: 50px;
+}
+
+.cta-container .cta-button {
+  background-color: white;
+}
+
+.cta-container .cta-button:hover {
+  background-color:white;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .journey-container {
+    flex-direction: column;
+  }
+
+  .stage {
+    flex: 1 1 100%;
+  }
+}
+
+
+    footer {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 5px;
+      font-size: 15px;
+      color: var(--green-dark);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <p>Personality test game: Lovestory</p>
+    <h1><strong>WHAT FRUITS ARE YOU?</strong></h1>
+    <a href="mở đầu.html" class="cta-button">Click to play</a>
+  </header>
+
+    <h2 class="carousel-title"> Khám phá ngay: Bạn là loại quả nào trong tình yêu?</h2>
+  <!-- 🍉 Carousel -->
+  <section class="fruit-carousel">
+    <div class="fruit-track">
+      <img src="image/pomegranate_homepage.png" alt="Pomegranate">
+      <img src="image/rambutan_homepage.png" alt="Rambutan">
+      <img src="image/strawberry_homepage.png" alt="Strawberry">
+      <img src="image/blueberry_homepage.png" alt="Blueberry">
+      <img src="image/kiwi_homepage.png" alt="Kiwi">
+      <img src="image/lemon_homepage.png" alt="Lemon">
+      <img src="image/mangosteen_homepage.png" alt="Mangosteen">
+      <img src="image/pineapple_homepage.png" alt="Pineapple">
+      <!-- Lặp lại để hiệu ứng vô hạn -->
+      <img src="image/pomegranate_homepage.png" alt="Pomegranate">
+      <img src="image/rambutan_homepage.png" alt="Rambutan">
+      <img src="image/strawberry_homepage.png" alt="Strawberry">
+      <img src="image/blueberry_homepage.png" alt="Blueberry">
+     <img src="image/kiwi_homepage.png" alt="Kiwi">
+      <img src="image/lemon_homepage.png" alt="Lemon">
+      <img src="image/mangosteen_homepage.png" alt="Mangosteen">
+      <img src="image/pineapple_homepage.png" alt="Pineapple">
+            <img src="image/pomegranate_homepage.png" alt="Pomegranate">
+      <img src="image/rambutan_homepage.png" alt="Rambutan">
+      <img src="image/strawberry_homepage.png" alt="Strawberry">
+      <img src="image/blueberry_homepage.png" alt="Blueberry">
+     <img src="image/kiwi_homepage.png" alt="Kiwi">
+      <img src="image/lemon_homepage.png" alt="Lemon">
+      <img src="image/mangosteen_homepage.png" alt="Mangosteen">
+      <img src="image/pineapple_homepage.png" alt="Pineapple">
+       <img src="image/rambutan_homepage.png" alt="Rambutan">
+      <img src="image/strawberry_homepage.png" alt="Strawberry">
+      <img src="image/blueberry_homepage.png" alt="Blueberry">
+     <img src="image/kiwi_homepage.png" alt="Kiwi">
+      <img src="image/lemon_homepage.png" alt="Lemon">
+      <img src="image/mangosteen_homepage.png" alt="Mangosteen">
+      <img src="image/pineapple_homepage.png" alt="Pineapple">
+    </div>
+  </section>
+
+  <section class="love-summary">
+  <div class="love-wrapper">
+    <h2> Hành Trình Tình Yêu Trong Vườn Duyên</h2>
+    <p class="intro">
+      Trong khu vườn mang tên Vườn Duyên, bạn sẽ trải qua 4 giai đoạn để nuôi lớn hạt giống tình yêu của mình —
+      từ khi nó vừa được gieo xuống cho đến khi hoa nở rộ. Mỗi giai đoạn là một bước trưởng thành
+      trong cách bạn yêu, cảm nhận và thấu hiểu chính mình.
+    </p>
+
+    <div class="journey-container">
+      <div class="stage">
+        <h3> Giai đoạn 1: Gieo mầm </h3>
+        <p> Khi trái tim khẽ rung động lần đầu  <br>Tình yêu bắt đầu từ những điều thật nhỏ — một ánh nhìn, một nụ cười, hay cảm giác tim khẽ rung lên.
+Đó là khoảnh khắc ta lặng lẽ gieo những hạt giống đầu tiên của thương nhớ, để rồi chờ ngày nảy nở thành cảm xúc.
+       </p>
+      </div>
+
+      <div class="stage">
+        <h3> Giai đoạn 2: Ươm mầm </h3>
+        <p> Khi yêu thương lớn dần <br> Tình yêu lớn dần qua quan tâm và sẻ chia, qua những điều giản dị mà chân thành.
+Mỗi lời nói dịu dàng, mỗi hành động ấm áp như giọt nước lành nuôi dưỡng mầm yêu trong tim.</p>
+      </div>
+
+      <div class="stage">
+        <h3> Giai đoạn 3: Ra hoa </h3>
+        <p> Khi tình cảm trở nên rực rỡ <br> Khi cảm xúc đã đủ đầy, tình yêu bung nở như những cánh hoa đầu mùa.
+Ta bắt đầu sống thật với chính mình — ấm áp, sâu sắc, lãng mạn và tràn đầy sức sống.</p>
+      </div>
+
+      <div class="stage">
+        <h3> Giai đoạn 4: Kết trái</h3>
+        <p> Khi tình yêu trưởng thành <br> Sau bao mùa vun trồng, tình yêu trở thành trái ngọt của niềm tin và đồng hành.
+Đó là lúc ta hiểu rằng yêu thương không chỉ là cảm xúc, mà còn là sự gắn bó dịu dàng theo năm tháng.</p>
+      </div>
+    </div>
+    <br><br>
+ <p class="intro">
+      Tình yêu muôn hình vạn trạng. Mỗi người yêu và được yêu theo những cách khác nhau, ngọt ngào, tươi mới hay sâu sắc, lãng mạn. Còn bạn, bạn thể hiện tình yêu bằng cách nào, cảm xúc bạn mang lại trong tình yêu ra sao? 
+    </p>
+
+    <div class="cta-container">
+      <a href="mở đầu.html" class="cta-button" style="color:#145a32"> Khám phá ngay</a>
+    </div>
+  </div>
+</section>
+
+
+  <footer>
+    <p>© 2025 What Fruits Are You? | Created with love </p>
+  </footer>
+</body>
+</html>
