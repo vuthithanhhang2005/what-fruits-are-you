@@ -165,9 +165,6 @@
     <button id="seeResultBtn">Bấm để nhận kết quả</button>
   </div>
 
-    
-
-
   <script>
     const questions = [
       { q: "Khi bạn bắt đầu thích một người, bạn sẽ:", a: ["Lùi lại một bước để thấy người ấy rõ hơn","Đợi chờ và manifest tín hiệu của đối phương","Ngay lập tức chủ động làm quen","Up story, up note thu hút sự chú ý của đối phương"], bg:"images/background1.png" },
@@ -242,11 +239,21 @@
       else showQuestion(index);
     }
 
-    // Tính kết quả (demo — bạn có thể gán thật sau)
+    // ✅ SỬA PHẦN NÀY: tính kết quả ổn định dựa trên tổ hợp 12 câu trả lời
     function getResultFromAnswers() {
-      const total = answers.reduce((a,b)=>a+b,0);
-      const mod = total % 8;
       const fruits = ["mangosteen","rambutan","pomegranate","lemon","blueberry","pineapple","strawberry","kiwi"];
+
+      // Ghép tất cả đáp án thành chuỗi duy nhất
+      const answerStr = answers.join('');
+
+      // Tạo hash ổn định từ chuỗi lựa chọn
+      let hash = 0;
+      for (let i = 0; i < answerStr.length; i++) {
+        hash = (hash * 31 + answerStr.charCodeAt(i)) % 1000000007;
+      }
+
+      // Dựa trên hash % 8 để ra kết quả nhất quán
+      const mod = hash % fruits.length;
       return fruits[mod];
     }
 
