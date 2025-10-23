@@ -15,7 +15,7 @@
       height: 100vh;
       width: 100vw;
       background: url("slide 2.png") center center no-repeat;
-      background-size: contain; /* ✅ Giữ nguyên tỉ lệ ảnh, không cắt khi màn hình nhỏ */
+      background-size: contain; 
       background-color: #e8f8e8;
       display: flex;
       justify-content: center;
@@ -43,15 +43,14 @@
       transform: scale(1.05);
     }
 
-    /* ✅ Với màn hình lớn, phóng đầy và cho phép cắt nhẹ phần dưới ảnh */
+   
     @media (min-width: 1024px) {
       body {
         background-size: cover;
-        background-position: top center; /* Cắt nhẹ phần dưới, giữ phần trên (có chữ) */
+        background-position: top center; 
       }
     }
 
-    /* 📱 Mobile: lấy phần giữa của ảnh */
     @media (max-width: 1024px) {
       body {
         background-position: center center;
