@@ -75,10 +75,11 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background: linear-gradient(to bottom, #e8f8e8, #fff);
+      background: linear-gradient(to bottom, #c5f2c5, #fff);
       opacity:0;
       transition: opacity 300ms ease;
       pointer-events: none;
+      height: 100%;
     }
     .loading-overlay.show { opacity:1; pointer-events:auto; }
 
@@ -169,18 +170,18 @@
 
   <script>
     const questions = [
-      { q: "Khi bạn bắt đầu thích một người, bạn sẽ:", a: ["Lùi lại một bước","Đợi tín hiệu","Chủ động nhắn tin","Up story gây chú ý"], bg:"images/background1.png" },
-      { q: "Bạn tin vào tình yêu như thế nào?", a:["Tình yêu cần thời gian","Là sự lựa chọn","Tùy cảm xúc","Tình yêu sét đánh"], bg:"images/background1.png" },
-      { q: "Điều gì ở crush khiến bạn bị thu hút nhất?", a:["Cách nói chuyện","Ánh mắt","Nụ cười","Sự tự tin"], bg:"images/background1.png" },
-      { q: "Khi người yêu bạn stress, bạn sẽ:", a:["Phân tích giúp họ","Để họ có không gian","Pha trò vui","Ôm họ vào lòng"], bg:"images/background2.png" },
-      { q: "Bạn thể hiện tình cảm qua:", a:["Thời gian bên nhau","Tặng quà","Chăm sóc","Lời yêu ngọt ngào"], bg:"images/background2.png" },
-      { q: "Điều khiến bạn yên tâm nhất:", a:["Quan hệ ổn định","Cùng trải nghiệm","Được thấu hiểu","Được quan tâm"], bg:"images/background2.png" },
-      { q: "Bạn cảm nhận vai trò của bạn là:", a:["Giữ ổn định","Lắng nghe","Tạo khoảnh khắc","Truyền năng lượng"], bg:"images/background3.png" },
-      { q: "Khi có mâu thuẫn, bạn sẽ:", a:["Phân tích logic","Giữ im lặng","Nói thẳng","Đùa giỡn hạ nhiệt"], bg:"images/background3.png" },
-      { q: "Bạn ngưỡng mộ chuyện tình:", a:["Bền lâu","Sâu lắng","Nồng nhiệt","Nhiều trải nghiệm"], bg:"images/background3.png" },
-      { q: "Điều quan trọng nhất là:", a:["Đồng hành","Niềm vui","Chia sẻ","Tin tưởng"], bg:"images/background4.png" },
-      { q: "Khi tình yêu bền vững, bạn:", a:["Giữ ổn định","Deeptalk","Duy trì ngọt ngào","Tạo bất ngờ"], bg:"images/background4.png" },
-      { q: "Nếu người yêu thay đổi, bạn sẽ:", a:["Thẳng thắn nói chuyện","Thay đổi bản thân","Quan tâm hơn","Tạo niềm vui"], bg:"images/background4.png" }
+      { q: "Khi bạn bắt đầu thích một người, bạn sẽ:", a: ["Lùi lại một bước để thấy người ấy rõ hơn","Đợi chờ và manifest tín hiệu của đối phương","Ngay lập tức chủ động làm quen","Up story, up note thu hút sự chú ý của đối phương"], bg:"images/background1.png" },
+      { q: "Bạn nghĩ về tình yêu như thế nào?", a:["Tình yêu là cần thời gian vun đắp, mưa dầm thấm lâu","Tình yêu là sự lựa chọn. không phải điều bắt buộc","Không có quan niệm cụ thể về tình yêu","Tình yêu là định mệnh ta sinh ra dành cho nhau"], bg:"images/background1.png" },
+      { q: "Điều gì ở crush khiến bạn bị thu hút nhất?", a:["Cách nói chuyện và mindset","Ánh mắt và cử chỉ","Nụ cười và sự ngọt ngào","Sự tự tin và năng lượng"], bg:"images/background1.png" },
+      { q: "Khi người yêu bạn stress, bạn sẽ làm gì để giúp đỡ bạn ấy?", a:["Phân tích và cố gắng đưa ra lời khuyên hữu ích giúp người yêu","Dành cho họ không gian riêng để bình tĩnh và giải quyết vấn đề của họ","Pha trò vui, tạo tiếng cường nhằm kéo mood người yêu lên","Ôm họ vào lòng, an ủi bằng những lời động viên tâm tình"], bg:"images/background2.png" },
+      { q: "Bạn thích thể hiện tình cảm qua ngôn ngữ tình yêu nào?", a:["Dành cho đối phương nhiều thời gian bên nhau","Lên kế hoạch cho những buổi hẹn hò lãng mạn và tặng quà bất ngờ cho đối phương","Hành động quan tâm, chăm sóc đối phương tỉ mỉ, chân tình","Nhắn gửi những lời ngọt ngào, dễ thương"], bg:"images/background2.png" },
+      { q: "Điều khiến bạn yên tâm nhất và hạnh phúc nhất trong tình yêu?", a:["Mối quan hệ gắn bó lâu dài và ổn định","Cùng đối phương trải nghiệm cuộc sống, khám phá những điều mới","Cảm giác được người yêu thấu hiểu và yêu thương","Được đối phương quan tâm, chăm sóc bằng hành động và lời nói"], bg:"images/background2.png" },
+      { q: "Bạn cảm nhận vai trò của bạn thường là:", a:["Người cân bằng, vừa cương vừa nhu, giữ sự hài hòa cho mối tình"," Người luôn lắng nghe, thấu hiểu đối phương","Người luôn tìm kiếm các hoạt động bonding mới, tạo thêm kỉ niệm đáng nhớ giữa 2 người","Người truyền năng lượng tích cực, vui vẻ cho đối phương"], bg:"images/background3.png" },
+      { q: "Khi mối quan hệ có mâu thuẫn, tranh cãi, bạn sẽ là gì?", a:["Phân tích cho đối phương vấn đề dưới góc nhìn của bạn một cách logic","Giữ im lặng, đợi chờ đối phương mở lời trước","Nói thẳng hết suy nghĩ, cảm xúc ngay lập tức","Đùa giỡn cho không khí hạ nhiệt, hai người bình tĩnh hơn rồi nói chuyện"], bg:"images/background3.png" },
+      { q: "Bạn ngưỡng mộ chuyện tình như thế nào nhất?", a:["Mối tình bền lâu 10 năm, 20 năm... đến đầu bạc răng long","Chuyện tình sâu lắng, say đắm, nhiều cảm xúc","Chuyện tình nồng nhiệt, cháy bỏng như cả thế giới chỉ có đôi mình","Mối tình mà cả hai người cùng nhau trưởng thành, cùng khám phá thế giới"], bg:"images/background3.png" },
+      { q: "Điều quan trọng nhất với bạn để xây dựng mối tình là", a:["Sự đồng hành","Niềm vui và sự mới mẻ","Chia sẻ mọi điều"," Sự tin tưởng"], bg:"images/background4.png" },
+      { q: "Khi tình yêu đã bền vững, bạn thường:", a:["Không làm gì xa lạ, giữ mối quan hệ ổn định, êm đềm như mái ấm an toàn","Chia sẻ, deeptalk để kết nối tâm hồn ngày càng bền chặt","Duy trì ngọt ngào, lãng mạn như thuở mới quen","Tìm và tạo bất ngờ, niềm vui, làm mới tình yêu mỗi ngày"], bg:"images/background4.png" },
+      { q: "Nếu bạn nhận thấy giữa 2 người có khoảng cách, bạn sẽ:", a:["Thẳng thắn nói chuyện, tìm hiểu nguyên nhân để giải quyết","Tự thay đổi bản thân để phù hợp với người ấy","Dành thời gian quan tâm, chăm sóc người yêu nhiều hơn","Gợi chuyện vui, chuyện mới để thu hẹp sự xa cách"], bg:"images/background4.png" }
     ];
 
     const quiz = document.getElementById('quiz');

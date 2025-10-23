@@ -9,8 +9,9 @@
   body {
     margin: 0;
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-    background: linear-gradient(to bottom, #e8f8e8, #fff);
+    background: linear-gradient(to bottom, rgb(187, 235, 187), #fff);
     color: #111;
+    height: 100%;
   }
 
   .wrap {
@@ -50,7 +51,6 @@
 
   .slug { display: none; }
 
-  
   .frame {
     border: none;
     border-radius: 14px;
@@ -182,9 +182,10 @@
     <div class="slug" id="slugText"></div>
   </div>
 
-  <!-- dòng chữ "Kết quả của bạn là" chỉ hiện khi đúng nhân vật người chơi -->
- <img src="ảnh kết quả.png" alt="Các loại quả" style="height: 50px; width: auto; margin-bottom: 0px; margin-top: 0px;"/>
-  <div id="resultLabel" class="label" style="display:none;"> <strong><h style="font-size: 20px; margin-top: 0px; margin-bottom: 0px;"> LOVESTORY: WHAT FRUITS ARE YOU?</strong></h> </div>
+  <img src="ảnh kết quả.png" alt="Các loại quả" style="height: 50px; width: auto; margin-bottom: 0px; margin-top: 0px;"/>
+  <div id="resultLabel" class="label" style="display:none;">
+    <strong><h style="font-size: 20px; margin-top: 0px; margin-bottom: 0px; color:#237b36; "> LOVESTORY: WHAT FRUITS ARE YOU?</strong></h>
+  </div>
 
   <div class="frame">
     <img id="resultImg" alt="Kết quả tình duyên">
@@ -192,8 +193,10 @@
 
   <div class="actions">
     <button id="saveBtn">Lưu ảnh</button>
-    <button id="shareBtn" class="light"> Chia sẻ </button>
+    <button id="shareBtn" class="light">Chia sẻ</button>
     <button id="compatBtn" class="light">Tìm hiểu các nhân vật khác</button>
+    <!-- ✅ Nút mới được thêm vào đây -->
+    <button id="surveyBtn" class="light">Tham gia khảo sát</button>
   </div>
 </main>
 
@@ -212,12 +215,9 @@
       <strong>Các nhân vật khác</strong>
       <div id="otherList"></div>
     </div>
-
     <button class="close" id="closeModal">Đóng</button>
   </div>
 </div>
-
-
 
 <script>
 const fruits = {
@@ -242,10 +242,7 @@ function loadFruit(key){
   $('#resultImg').alt = current.slug;
   document.title = `${current.slug} — Love Fruit`;
 
-  // hiển thị dòng "Kết quả của bạn là" nếu đúng loại người chơi
   $('#resultLabel').style.display = (current.slug === myType) ? 'block' : 'none';
-
-  // hiện nút quay lại nếu đang xem nhân vật khác
   $('#backBtn').classList.toggle('show', current.slug !== myType);
 }
 
@@ -321,6 +318,11 @@ modal.addEventListener('click', e=>{
     loadFruit(t);
   }
 });
+
+/* ✅ Sự kiện cho nút khảo sát */
+$('#surveyBtn').onclick = ()=>{
+  window.open('https://docs.google.com/forms/d/e/1FAIpQLSeKBkRiwRAsZm68SBEvpPFNEm4IlQCTFGD_WpTgJQJY4H8wsQ/viewform', '_blank');
+};
 </script>
 </body>
 </html>
