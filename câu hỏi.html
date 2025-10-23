@@ -7,135 +7,24 @@
   <style>
     * { box-sizing: border-box; margin:0; padding:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
     html,body { width:100%; height:100%; overflow:hidden; }
-
-    /* container */
-    .quiz-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-image 0.8s ease;
-    }
-
-    /* progress */
-    .progress-bar {
-      position: absolute;
-      top: 22px;
-      left: 0;
-      width: 100%;
-      height: 6px;
-      background: rgba(255,255,255,0.35);
-      border-radius: 6px;
-      overflow: hidden;
-    }
+    .quiz-container { position: relative; width: 100%; height: 100vh; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; transition: background-image 0.8s ease; }
+    .progress-bar { position: absolute; top: 22px; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.35); border-radius: 6px; overflow: hidden; }
     .progress { height:100%; background:#1f8b57; width:0%; transition: width 400ms ease; }
-
-    /* question card */
-    .question-box {
-      position: relative;
-      z-index: 2;
-      width: min(880px, 86%);
-      padding: 28px;
-      border-radius: 18px;
-      background: rgba(11, 88, 49, 0.72);
-      color: white;
-      text-align: center;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-      transition: opacity 300ms ease, transform 300ms ease;
-    }
+    .question-box { position: relative; z-index: 2; width: min(880px, 86%); padding: 28px; border-radius: 18px; background: rgba(11, 88, 49, 0.72); color: white; text-align: center; backdrop-filter: blur(6px); box-shadow: 0 6px 18px rgba(0,0,0,0.18); transition: opacity 300ms ease, transform 300ms ease; }
     .question { font-size: 22px; font-weight:700; line-height:1.25; margin-bottom:18px; }
-
-    /* answers */
     .answers { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
-    .answers button {
-      background: rgba(255,255,255,0.95);
-      color: #222;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      transition: transform 160ms ease, background 160ms;
-      text-align: left;
-    }
+    .answers button { background: rgba(255,255,255,0.95); color: #222; border: none; padding: 12px 16px; border-radius: 12px; font-size: 16px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.08); transition: transform 160ms ease, background 160ms; text-align: left; }
     .answers button:hover { transform: translateY(-3px); background: #e7f6eb; }
     .answers button:active { transform: translateY(0); }
-
-    /* overlay */
-    .loading-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 30;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: linear-gradient(to bottom, #c5f2c5, #fff);
-      opacity:0;
-      transition: opacity 300ms ease;
-      pointer-events: none;
-      height: 100%;
-    }
+    .loading-overlay { position: absolute; inset: 0; z-index: 30; display:flex; align-items:center; justify-content:center; background: linear-gradient(to bottom, #c5f2c5, #fff); opacity:0; transition: opacity 300ms ease; pointer-events: none; height: 100%; }
     .loading-overlay.show { opacity:1; pointer-events:auto; }
-
-    .seed {
-      width: 50px;
-      height: auto;
-      animation: spinGrow 3s ease-in-out forwards;
-    }
-
-    @keyframes spinGrow {
-      0% { transform: scale(0.8) rotate(0deg); opacity: 0; }
-      30% { opacity: 1; }
-      100% { transform: scale(1.1) rotate(360deg); opacity: 1; }
-    }
-
-    /* end screen */
-    #endScreen {
-      position: fixed;
-      inset: 0;
-      background:linear-gradient(to bottom, #e8f8e8, #fff);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      z-index: 999;
-      transition: opacity .6s ease;
-      opacity: 0;
-      pointer-events: none;
-    }
-    #endScreen.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #endScreen h2 {
-      font-size: 1.8rem;
-      color: #03784f;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-    #seeResultBtn {
-      background: #03784f;
-      color: #fff;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform .2s ease, background .2s ease;
-    }
-    #seeResultBtn:hover {
-      background: #03784f;
-      transform: scale(1.05);
-    }
-
+    .seed { width: 50px; height: auto; animation: spinGrow 3s ease-in-out forwards; }
+    @keyframes spinGrow { 0% { transform: scale(0.8) rotate(0deg); opacity: 0; } 30% { opacity: 1; } 100% { transform: scale(1.1) rotate(360deg); opacity: 1; } }
+    #endScreen { position: fixed; inset: 0; background:linear-gradient(to bottom, #e8f8e8, #fff); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 999; transition: opacity .6s ease; opacity: 0; pointer-events: none; }
+    #endScreen.show { opacity: 1; pointer-events: auto; }
+    #endScreen h2 { font-size: 1.8rem; color: #03784f; margin-bottom: 20px; font-weight: 700; }
+    #seeResultBtn { background: #03784f; color: #fff; border: none; padding: 14px 24px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    #seeResultBtn:hover { background: #03784f; transform: scale(1.05); }
     @media (max-width:600px) {
       .question { font-size:18px; }
       .answers button { font-size:15px; padding:10px 12px; }
@@ -143,24 +32,19 @@
   </style>
 </head>
 <body>
-
   <div class="quiz-container" id="quiz">
     <div class="progress-bar"><div class="progress" id="progress"></div></div>
-
     <div class="question-box" id="questionBox">
       <div class="question" id="questionText"></div>
       <div class="answers" id="answerButtons"></div>
     </div>
-
-    <!-- overlay -->
     <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
       <img src="nảy mầm.png" alt="Chuyển cảnh" class="seed" id="seedImg">
     </div>
   </div>
 
-  <!-- màn hình kết thúc -->
   <div id="endScreen">
-  <img src="wfru.png" alt="nhân vật" class="icon" style ="width: 90px; height: auto;">
+    <img src="wfru.png" alt="nhân vật" class="icon" style ="width: 90px; height: auto;">
     <h2>Bạn là ai trong tình duyên?</h2>
     <button id="seeResultBtn">Bấm để nhận kết quả</button>
   </div>
@@ -170,7 +54,7 @@
       { q: "Khi bạn bắt đầu thích một người, bạn sẽ:", a: ["Lùi lại một bước để thấy người ấy rõ hơn","Đợi chờ và manifest tín hiệu của đối phương","Ngay lập tức chủ động làm quen","Up story, up note thu hút sự chú ý của đối phương"], bg:"images/background1.png" },
       { q: "Bạn nghĩ về tình yêu như thế nào?", a:["Tình yêu là cần thời gian vun đắp, mưa dầm thấm lâu","Tình yêu là sự lựa chọn, không phải điều bắt buộc","Không có quan niệm cụ thể về tình yêu","Tình yêu là định mệnh ta sinh ra dành cho nhau"], bg:"images/background1.png" },
       { q: "Điều gì ở crush khiến bạn bị thu hút nhất?", a:["Cách nói chuyện và mindset","Ánh mắt và cử chỉ","Nụ cười và sự ngọt ngào","Sự tự tin và năng lượng"], bg:"images/background1.png" },
-      { q: "Khi người yêu bạn stress, bạn sẽ làm gì để giúp đỡ bạn ấy?", a:["Phân tích và cố gắng đưa ra lời khuyên hữu ích giúp người yêu","Dành cho họ không gian riêng để bình tĩnh và giải quyết vấn đề của họ","Pha trò vui, tạo tiếng cường nhằm kéo mood người yêu lên","Ôm họ vào lòng, an ủi bằng những lời động viên tâm tình"], bg:"images/background2.png" },
+      { q: "Khi người yêu bạn stress, bạn sẽ làm gì để giúp đỡ bạn ấy?", a:["Phân tích và cố gắng đưa ra lời khuyên hữu ích giúp người yêu","Dành cho họ không gian riêng để bình tĩnh và giải quyết vấn đề của họ","Pha trò vui, tạo tiếng cười nhằm kéo mood người yêu lên","Ôm họ vào lòng, an ủi bằng những lời động viên tâm tình"], bg:"images/background2.png" },
       { q: "Bạn thích thể hiện tình cảm qua ngôn ngữ tình yêu nào?", a:["Dành cho đối phương nhiều thời gian bên nhau","Lên kế hoạch cho những buổi hẹn hò lãng mạn và tặng quà bất ngờ cho đối phương","Hành động quan tâm, chăm sóc đối phương tỉ mỉ, chân tình","Nhắn gửi những lời ngọt ngào, dễ thương"], bg:"images/background2.png" },
       { q: "Điều khiến bạn yên tâm nhất trong tình yêu?", a:["Một mối quan hệ ổn định, có định hướng rõ ràng cho tương lai","Cùng nhau khám phá, trải nghiệm những điều mới mẻ và khác biệt","Cảm giác được thấu hiểu và lắng nghe thật sự từ đối phương","Luôn được quan tâm, hỏi han và cảm nhận sự yêu thương mỗi ngày"], bg:"images/background2.png" },
       { q: "Bạn cảm nhận vai trò của bạn thường là:", a:["Người cân bằng, vừa cương vừa nhu, giữ sự hài hòa cho mối tình"," Người luôn lắng nghe, thấu hiểu đối phương","Người luôn tìm kiếm các hoạt động bonding mới, tạo thêm kỉ niệm đáng nhớ giữa 2 người","Người truyền năng lượng tích cực, vui vẻ cho đối phương"], bg:"images/background3.png" },
@@ -181,97 +65,68 @@
       { q: "Nếu bạn nhận thấy giữa 2 người có khoảng cách, bạn sẽ:", a:["Thẳng thắn nói chuyện, tìm hiểu nguyên nhân để giải quyết","Tự thay đổi bản thân để phù hợp với người ấy","Dành thời gian quan tâm, chăm sóc người yêu nhiều hơn","Gợi chuyện vui, chuyện mới để thu hẹp sự xa cách"], bg:"images/background4.png" }
     ];
 
-    const quiz = document.getElementById('quiz');
-    const questionBox = document.getElementById('questionBox');
-    const questionText = document.getElementById('questionText');
-    const answerButtons = document.getElementById('answerButtons');
-    const progressBar = document.getElementById('progress');
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const seedImg = document.getElementById('seedImg');
-    const endScreen = document.getElementById('endScreen');
-    const seeResultBtn = document.getElementById('seeResultBtn');
+    const quiz=document.getElementById('quiz'),
+          questionBox=document.getElementById('questionBox'),
+          questionText=document.getElementById('questionText'),
+          answerButtons=document.getElementById('answerButtons'),
+          progressBar=document.getElementById('progress'),
+          loadingOverlay=document.getElementById('loadingOverlay'),
+          seedImg=document.getElementById('seedImg'),
+          endScreen=document.getElementById('endScreen'),
+          seeResultBtn=document.getElementById('seeResultBtn');
+    let index=0;const TOTAL=questions.length;const answers=[];
+    const TRANSITION_IMAGES={0:"nảy mầm.png",3:"mặt trời.png",6:"hoa.png",9:"fruit.png"};
 
-    let index = 0;
-    const TOTAL = questions.length;
-    const answers = [];
+    // 🔊 Thêm âm thanh chọn đáp án (giảm âm lượng)
+    const selectSound = new Audio("click.mp3");
+    selectSound.volume = 0.10; // 
 
-    const TRANSITION_IMAGES = { 0:"nảy mầm.png", 3:"mặt trời.png", 6:"hoa.png", 9:"fruit.png" };
-
-    function preloadImage(url) { const img = new Image(); img.src = url; }
-
-    function showQuestion(i) {
-      const item = questions[i];
-      quiz.style.backgroundImage = `url('${item.bg}')`;
-      questionText.textContent = item.q;
-      answerButtons.innerHTML = '';
-      item.a.forEach((txt, idx) => {
-        const b = document.createElement('button');
-        b.textContent = txt;
-        b.onclick = () => {
-          answers.push(idx); // lưu lại lựa chọn
-          Array.from(answerButtons.children).forEach(el => el.disabled = true);
+    function preloadImage(url){const img=new Image();img.src=url;}
+    function showQuestion(i){
+      const item=questions[i];
+      quiz.style.backgroundImage=`url('${item.bg}')`;
+      questionText.textContent=item.q;
+      answerButtons.innerHTML='';
+      item.a.forEach((txt,idx)=>{
+        const b=document.createElement('button');
+        b.textContent=txt;
+        b.onclick=()=>{
+          selectSound.currentTime = 0;
+          selectSound.play(); 
+          answers.push(idx);
+          Array.from(answerButtons.children).forEach(el=>el.disabled=true);
           next();
         };
         answerButtons.appendChild(b);
       });
-      progressBar.style.width = `${((i + 1) / TOTAL) * 100}%`;
-      if (questions[i + 1]) preloadImage(questions[i + 1].bg);
+      progressBar.style.width=`${((i+1)/TOTAL)*100}%`;
+      if(questions[i+1])preloadImage(questions[i+1].bg);
     }
+    function showSprout(callback,imgSrc,nextBg=null){if(nextBg)quiz.style.backgroundImage=`url('${nextBg}')`;seedImg.src=imgSrc;seedImg.style.animation="none";void seedImg.offsetWidth;seedImg.style.animation="spinGrow 3s ease-in-out forwards";loadingOverlay.classList.add('show');setTimeout(()=>{loadingOverlay.classList.remove('show');callback();},3500);}
+    function next(){index++;if(index>=TOTAL)return showEnd();const nextBg=questions[index].bg;if(TRANSITION_IMAGES[index])showSprout(()=>showQuestion(index),TRANSITION_IMAGES[index],nextBg);else showQuestion(index);}
+    function getResultFromAnswers(){const fruits=["mangosteen","rambutan","pomegranate","lemon","blueberry","pineapple","strawberry","kiwi"];const answerStr=answers.join('');let hash=0;for(let i=0;i<answerStr.length;i++){hash=(hash*31+answerStr.charCodeAt(i))%1000000007;}return fruits[hash%fruits.length];}
+    function showEnd(){quiz.style.backgroundImage=`url('images/20.jpg')`;questionBox.style.display="none";progressBar.style.width='100%';setTimeout(()=>{endScreen.classList.add('show');},600);}
+    seeResultBtn.onclick=()=>{const resultType=getResultFromAnswers();window.location.href=`kết quả.html?type=${resultType}`;};
+    preloadImage(questions[0].bg);showSprout(()=>showQuestion(index),"nảy mầm.png",questions[0].bg);
+  </script>
 
-    function showSprout(callback, imgSrc, nextBg = null) {
-      if (nextBg) quiz.style.backgroundImage = `url('${nextBg}')`;
-      seedImg.src = imgSrc;
-      seedImg.style.animation = "none";
-      void seedImg.offsetWidth;
-      seedImg.style.animation = "spinGrow 3s ease-in-out forwards";
-      loadingOverlay.classList.add('show');
-      setTimeout(() => {
-        loadingOverlay.classList.remove('show');
-        callback();
-      }, 3500);
-    }
-
-    function next() {
-      index++;
-      if (index >= TOTAL) return showEnd();
-      const nextBg = questions[index].bg;
-      if (TRANSITION_IMAGES[index]) showSprout(() => showQuestion(index), TRANSITION_IMAGES[index], nextBg);
-      else showQuestion(index);
-    }
-
-    // ✅ SỬA PHẦN NÀY: tính kết quả ổn định dựa trên tổ hợp 12 câu trả lời
-    function getResultFromAnswers() {
-      const fruits = ["mangosteen","rambutan","pomegranate","lemon","blueberry","pineapple","strawberry","kiwi"];
-
-      // Ghép tất cả đáp án thành chuỗi duy nhất
-      const answerStr = answers.join('');
-
-      // Tạo hash ổn định từ chuỗi lựa chọn
-      let hash = 0;
-      for (let i = 0; i < answerStr.length; i++) {
-        hash = (hash * 31 + answerStr.charCodeAt(i)) % 1000000007;
-      }
-
-      // Dựa trên hash % 8 để ra kết quả nhất quán
-      const mod = hash % fruits.length;
-      return fruits[mod];
-    }
-
-    function showEnd() {
-      quiz.style.backgroundImage = `url('images/20.jpg')`;
-      questionBox.style.display = "none";
-      progressBar.style.width = '100%';
-      setTimeout(() => { endScreen.classList.add('show'); }, 600);
-    }
-
-    seeResultBtn.onclick = () => {
-      const resultType = getResultFromAnswers();
-      window.location.href = `kết quả.html?type=${resultType}`;
-    };
-
-    // bắt đầu
-    preloadImage(questions[0].bg);
-    showSprout(() => showQuestion(index), "nảy mầm.png", questions[0].bg);
+  <!-- 🎵 Nhạc nền tự động -->
+  <audio id="bgMusic" src="piano.mp3" loop preload="auto" autoplay></audio>
+  <button id="soundToggle" title="Tắt/Bật âm thanh"
+    style="position:fixed;top:20px;right:20px;z-index:2000;width:48px;height:48px;
+           border:none;border-radius:50%;background:rgba(255,255,255,0.85);
+           box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;font-size:20px;">🔊</button>
+  <script>
+    const bgMusic=document.getElementById("bgMusic");
+    const soundToggle=document.getElementById("soundToggle");
+    let isPlaying=true;
+    bgMusic.volume=0.05;
+    window.addEventListener("load",()=>{bgMusic.play().catch(()=>{document.addEventListener("click",()=>bgMusic.play(),{once:true});});});
+    soundToggle.addEventListener("click",()=>{if(isPlaying){fadeVolume(bgMusic,0,400,()=>bgMusic.pause());soundToggle.textContent="🔇";}else{bgMusic.play().then(()=>fadeVolume(bgMusic,0.25,800));soundToggle.textContent="🔊";}isPlaying=!isPlaying;});
+    function fadeVolume(audio,target,duration,onDone){const step=(target-audio.volume)/(duration/50);
+      const timer=setInterval(()=>{audio.volume=Math.max(0,Math.min(1,audio.volume+step));
+        if((step>0&&audio.volume>=target)||(step<0&&audio.volume<=target)){clearInterval(timer);
+          audio.volume=target;if(onDone)onDone();}},50);}
   </script>
 </body>
 </html>
