@@ -135,7 +135,6 @@
       .answers button { font-size:15px; padding:10px 12px; }
     }
 
-   
     #music-toggle {
       position: fixed;
       bottom: 20px;
@@ -173,7 +172,6 @@
     <button id="seeResultBtn">Bấm để nhận kết quả</button>
   </div>
 
-  
   <button id="music-toggle">🔊</button>
   <audio id="bgMusic" src="piano.mp3" loop preload="auto"></audio>
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
@@ -194,8 +192,6 @@
       { q: "Nếu bạn nhận thấy giữa 2 người có khoảng cách, bạn sẽ:", a:["Thẳng thắn nói chuyện, tìm hiểu nguyên nhân để giải quyết","Tự thay đổi bản thân để phù hợp với người ấy","Dành thời gian quan tâm, chăm sóc người yêu nhiều hơn","Gợi chuyện vui, chuyện mới để thu hẹp sự xa cách"], bg:"images/background4.png" }
     ];
 
-
-
     const quiz = document.getElementById('quiz');
     const questionBox = document.getElementById('questionBox');
     const questionText = document.getElementById('questionText');
@@ -215,11 +211,7 @@
     const TRANSITION_IMAGES = { 0:"nảy mầm.png", 3:"mặt trời.png", 6:"hoa.png", 9:"fruit.png" };
 
     function preloadImage(url) { const img = new Image(); img.src = url; }
-
-    function playClick() {
-      clickSound.currentTime = 0;
-      clickSound.play().catch(()=>{});
-    }
+    function playClick() { clickSound.currentTime = 0; clickSound.play().catch(()=>{}); }
 
     function showQuestion(i) {
       const item = questions[i];
@@ -231,7 +223,7 @@
         b.textContent = txt;
         b.onclick = () => {
           playClick();
-          answers.push(idx);
+          answers.push(idx); // hash chuỗi sẽ dùng các số 0-3
           Array.from(answerButtons.children).forEach(el => el.disabled = true);
           next();
         };
@@ -262,10 +254,15 @@
       else showQuestion(index);
     }
 
+    // ✅ HASH CHUỖI CÁCH 1
     function getResultFromAnswers() {
-      const total = answers.reduce((a,b)=>a+b,0);
-      const mod = total % 8;
+      const answerStr = answers.join('');
+      let hash = 0;
+      for (let i = 0; i < answerStr.length; i++) {
+        hash = (hash * 31 + answerStr.charCodeAt(i)) % 1000000007;
+      }
       const fruits = ["mangosteen","rambutan","pomegranate","lemon","blueberry","pineapple","strawberry","kiwi"];
+      const mod = hash % fruits.length;
       return fruits[mod];
     }
 
@@ -285,10 +282,9 @@
     preloadImage(questions[0].bg);
     showSprout(() => showQuestion(index), "nảy mầm.png", questions[0].bg);
 
-   
+    // nhạc
     bgMusic.volume = 0.3;
     let started = false;
-
     function startMusic() {
       if (!started) {
         started = true;
