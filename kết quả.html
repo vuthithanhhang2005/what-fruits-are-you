@@ -223,14 +223,14 @@
 
 <script>
 const fruits = {
-  mangosteen:{slug:"mangosteen",image:"./images/mangosteen.png",compat:["Kiwi","Blueberry"],avoid:["Lemon"]},
-  rambutan:{slug:"rambutan",image:"./images/rambutan.png",compat:["Strawberry","Pomegranate"],avoid:["Blueberry"]},
-  pomegranate:{slug:"pomegranate",image:"./images/pomegranate.png",compat:["Mangosteen","Blueberry"],avoid:["Rambutan"]},
-  lemon:{slug:"lemon",image:"./images/lemon.png",compat:["Strawberry","Rambutan"],avoid:["Mangosteen","Kiwi"]},
-  blueberry:{slug:"blueberry",image:"./images/blueberry.png",compat:["Mangosteen","Pomegranate"],avoid:["Rambutan","Strawberry"]},
-  pineapple:{slug:"pineapple",image:"./images/pineapple.png",compat:["Mangosteen","Strawberry"],avoid:["Lemon"]},
-  strawberry:{slug:"strawberry",image:"./images/strawberry.png",compat:["Kiwi","Rambutan"],avoid:["Blueberry","Pomegranate"]},
-  kiwi:{slug:"kiwi",image:"./images/kiwi.png",compat:["Strawberry","Mangosteen"],avoid:["Lemon"]}
+  mangosteen:{slug:"mangosteen",image:"./images/mangosteen.png",compat:["Kiwi","Blueberry"],avoid:["Pomegranate","Rambutan"]},
+  rambutan:{slug:"rambutan",image:"./images/rambutan.png",compat:["Strawberry","Pomegranate"],avoid:["Blueberry","Mangosteen"]},
+  pomegranate:{slug:"pomegranate",image:"./images/pomegranate.png",compat:["Pineapple","Rambutan"],avoid:["Kiwi","Lemon"]},
+  lemon:{slug:"lemon",image:"./images/lemon.png",compat:["Kiwi","Blueberry"],avoid:["Pomegranate","Strawberry"]},
+  blueberry:{slug:"blueberry",image:"./images/blueberry.png",compat:["Mangosteen","Lemon"],avoid:["Rambutan","Strawberry"]},
+  pineapple:{slug:"pineapple",image:"./images/pineapple.png",compat:["Pomegranate","Strawberry"],avoid:["Lemon","Kiwi"]},
+  strawberry:{slug:"strawberry",image:"./images/strawberry.png",compat:["Pineapple","Rambutan"],avoid:["Blueberry","Lemon"]},
+  kiwi:{slug:"kiwi",image:"./images/kiwi.png",compat:["Lemon","Mangosteen"],avoid:["Pineapple", "Pomegranate"]}
 };
 
 const $ = q => document.querySelector(q);
