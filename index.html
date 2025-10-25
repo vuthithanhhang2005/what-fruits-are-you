@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What Fruits Are You?</title>
- <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRTTDZBH15"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-GRTTDZBH15'); </script>
+ 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRTTDZBH15"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -368,9 +368,22 @@ Ta bắt đầu sống thật với chính mình — ấm áp, sâu sắc, lãng
   </div>
 </section>
 
-
-  <footer>
+<footer>
     <p>© 2025 What Fruits Are You? | Created with love </p>
   </footer>
+  
+<script>
+  const playButton = document.querySelector('.cta-button');
+
+  playButton.addEventListener('click', function() {
+    gtag('event', 'play_game', {
+      event_category: 'Game',
+      event_label: 'Homepage Click to Play',
+      value: 1
+    });
+  });
+</script>
+
+  
 </body>
 </html>
