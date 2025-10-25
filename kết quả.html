@@ -335,5 +335,31 @@ $('#surveyBtn').onclick = ()=>{
   window.open('https://docs.google.com/forms/d/e/1FAIpQLSeKBkRiwRAsZm68SBEvpPFNEm4IlQCTFGD_WpTgJQJY4H8wsQ/viewform', '_blank');
 };
 </script>
+<script>
+  window.addEventListener('load', function() {
+    gtag('event', 'finish_quiz', {
+      event_category: 'Game',
+      event_label: 'Quiz Finished - Result Page Viewed'
+    });
+  });
+
+ 
+  const saveBtn = document.getElementById('saveBtn');
+  saveBtn.addEventListener('click', function() {
+    gtag('event', 'save_result', {
+      event_category: 'Engagement',
+      event_label: 'User Saved Result Image'
+    });
+  });
+
+  const shareBtn = document.getElementById('shareBtn');
+  shareBtn.addEventListener('click', function() {
+    gtag('event', 'share_result', {
+      event_category: 'Social',
+      event_label: 'User Shared Result'
+    });
+  });
+</script>
+
 </body>
 </html>

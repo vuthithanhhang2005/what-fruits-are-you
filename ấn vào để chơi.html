@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vườn Duyên</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRTTDZBH15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GRTTDZBH15');
+</script>
+
+
+
   <style>
     * {
       margin: 0;
@@ -57,10 +67,20 @@
   </style>
 </head>
 <body>
-
   <button class="enter-button" onclick="location.href='câu hỏi.html'">
     Trả lời câu hỏi
   </button>
+
+    <script>
+    const answerButton = document.getElementById('answerButton');
+    answerButton.addEventListener('click', function() {
+      gtag('event', 'begin_game', {
+        event_category: 'Game',
+        event_label: 'Clicked to Start Questions'
+      });
+      location.href = 'câu hỏi.html';
+    });
+  </script>
 
 </body>
 </html>
